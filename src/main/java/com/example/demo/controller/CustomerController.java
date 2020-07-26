@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,6 +68,21 @@ public class CustomerController {
 	public Customer getSingleCustomer(@PathVariable("cid") Integer cid) {
 		Customer customer = repo.findById(cid).orElse(null);
 		return customer;
+	}
+	
+	
+	@GetMapping("/customer/byname/{cname}")
+	@ResponseBody
+	public List<Customer> getCustomerByName(@PathVariable("cname") String cName) {
+		List<Customer> list = repo.findBycName(cName);
+		return list;
+	}
+	
+	@GetMapping("/customer/byemail/{cemail}")
+	@ResponseBody
+	public List<Customer> getCustomerByEmail(@PathVariable("cemail") String cEmail) {
+		List<Customer> list = repo.findBycEmail(cEmail);
+		return list;
 	}
 	
 	@PostMapping("/customer/create")
